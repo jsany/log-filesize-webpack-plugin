@@ -1,0 +1,23 @@
+**/*.html
+
+## OS
+.DS_Store
+.idea
+package-lock.json
+yarn.lock
+
+# Ignored suffix
+*.log
+*.png
+*ignore
+
+## Local
+node_modules
+site/vendor
+/test
+
+## Built-files
+.cache
+/dist
+/lib
+/es

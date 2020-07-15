@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "lib": ["ES2015","ESNext"],
+    "outDir": "lib",
+    "strict": true,
+    "moduleResolution": "node",
+    "declaration": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@/*": ["./*"], // src 目录别名
+      "@~/*": ["../*"], // 根目录别名
+    },
+    "plugins": [{ "transform": "typescript-transform-paths" }],
+    "pretty": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "skipLibCheck": true,
+    "removeComments": true
+  },
+  "include": ["src/**/*", "typings.d.ts"],
+  "exclude": [
+    "node_modules",
+    "**/test/*",
+    "__test__",
+    "**/*.spec.ts",
+    "lib",
+    "es",
+    "dist",
+    "build",
+    "example"
+  ]
+}
