@@ -2,6 +2,7 @@
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
   <img src="https://img.shields.io/badge/node-%3E%3D8.10.0-blue.svg" />
+  <img alt="npm bundle size (scoped)" src="https://img.shields.io/bundlephobia/minzip/@jsany/log-filesize-webpack-plugin">
   <a href="https://github.com/jsany/log-filesize-webpack-plugin#readme" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
