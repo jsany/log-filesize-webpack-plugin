@@ -43,6 +43,8 @@ module.exports = {
   // ...
   plugins: [
     new LogFilesizeWebpackPlugin()
+    // or
+    // new LogFilesizeWebpackPlugin({gzip: true})
   ]
   // ...
 }
