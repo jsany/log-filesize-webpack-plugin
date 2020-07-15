@@ -7,7 +7,7 @@ const ui = require('cliui')({ with: 80 });
 
 export interface IOptions {
 
-  /* Switch log gzip */
+  /* Switch log gzipped filesize */
   gzip?: boolean;
   /* Switch log compile errors */
   errors?: boolean;
