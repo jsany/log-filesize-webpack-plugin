@@ -58,16 +58,16 @@ module.exports = {
 
 ## Options
 
-| Options    | Type    | Default             | Description                                                         |
-| ---------- | ------- | ------------------- | ------------------------------------------------------------------- |
-| `gzip`     | boolean | `true`              | Print gzipped filesize                                              |
-| `errors`   | boolean | `true`              | Print compile errors                                                |
-| `warnings` | boolean | `true`              | Print compile warnings                                              |
-| `hash`     | boolean | `true`              | Print current compile hash                                          |
-| `version`  | boolean | `true`              | Print current webpack version                                       |
-| `time`     | boolean | `true`              | Print compile cost time                                             |
-| `builtAt`  | boolean | `true`              | Print when to start compiling                                       |
-| `maxSize`  | number  | `1.8 * 1024 * 1024` | These sizes are pretty large. We'll warn for bundles exceeding them |
+| Options    | Type    | Default                    | Description                                                         |
+| ---------- | ------- | -------------------------- | ------------------------------------------------------------------- |
+| `gzip`     | boolean | `true`                     | Print gzipped filesize                                              |
+| `errors`   | boolean | `true`                     | Print compile errors                                                |
+| `warnings` | boolean | `true`                     | Print compile warnings                                              |
+| `hash`     | boolean | `true`                     | Print current compile hash                                          |
+| `version`  | boolean | `true`                     | Print current webpack version                                       |
+| `time`     | boolean | `true`                     | Print compile cost time                                             |
+| `builtAt`  | boolean | `true`                     | Print when to start compiling                                       |
+| `maxSize`  | number  | `1.8 * 1024 * 1024` (Byte) | These sizes are pretty large. We'll warn for bundles exceeding them |
 
 ## Todo
 
@@ -92,3 +92,7 @@ Give a ⭐️ if this project helped you!
 
 Copyright © 2020 [jiangzhiguo2010](https://github.com/jsany).<br />
 This project is [MIT](https://github.com/jsany/log-filesize-webpack-plugin/blob/master/LICENSE) licensed.
+
+---
+
+_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
