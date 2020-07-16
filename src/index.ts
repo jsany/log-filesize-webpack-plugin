@@ -1,12 +1,13 @@
 import { Compiler, Stats } from 'webpack';
-import { join, resolve, relative } from 'path';
+import { join, relative } from 'path';
 import chalk from 'chalk';
-import { existsSync, readdirSync, readFileSync } from 'fs';
-import zlib from 'zlib';
+import filesize from '@/helper/filesize'
+import getGzippedSize from '@/helper/getGzippedSize'
+import makeRow from '@/helper/makeRow'
+import { isJS, isCSS, isIMAGE, isFONT, isJSON, isTXT } from '@/helper/fileType';
 const ui = require('cliui')({ with: 80 });
 
 export interface IOptions {
-
   /* Switch log gzipped filesize */
   gzip?: boolean;
   /* Switch log compile errors */
@@ -21,9 +22,8 @@ export interface IOptions {
   time?: boolean;
   /* Switch log when to start compiling */
   builtAt?: boolean;
-  /* These sizes are pretty large. We'll warn for bundles exceeding them. */
+  /* These js sizes are pretty large. We'll warn for bundles exceeding them. */
   maxSize: number;
-
 }
 
 const defaultOptions: IOptions = {
@@ -34,34 +34,9 @@ const defaultOptions: IOptions = {
   version: true,
   time: true,
   builtAt: true,
-  maxSize: 1.8 * 1024 * 1024,
+  maxSize: 1.8 * 1024 * 1024
 };
 
-const filesize = (bytes: number) => {
-  bytes = Math.abs(bytes);
-  const radix = 1024;
-  const unit = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-  let loop = 0;
-
-  // calculate
-  while (bytes >= radix) {
-    bytes /= radix;
-    ++loop;
-  }
-  return `${bytes.toFixed(1)} ${unit[loop]}`;
-};
-const getGzippedSize = (asset: any, dir: string) => {
-  const filepath = resolve(join(dir, asset.name));
-  if (existsSync(filepath)) {
-    const buffer = readFileSync(filepath);
-    return filesize(zlib.gzipSync(buffer).length);
-  }
-  return filesize(0);
-};
-
-const makeRow = (a: string, b: string, c: string): string => {
-  return ` ${a}\t      ${b}\t ${c}`;
-};
 class LogFilesizeWebpackPlugin {
   private options: IOptions;
 
@@ -92,8 +67,6 @@ class LogFilesizeWebpackPlugin {
         json?.children?.reduce((acc, child) => acc.concat(child?.assets), []);
 
     const seenNames = new Map();
-    const isJS = (val: string) => /\.js$/.test(val);
-    const isCSS = (val: string) => /\.css$/.test(val);
 
     const orderedAssets = assets
       ?.map((a) => {
@@ -106,17 +79,48 @@ class LogFilesizeWebpackPlugin {
           suggested: isLarge && isJS(a.name)
         };
       })
-      .filter((a) => {
+      .filter((a, i, arr) => {
         if (seenNames.has(a.name)) {
           return false;
         }
         seenNames.set(a.name, true);
-        return isJS(a.name) || isCSS(a.name);
+
+        if (isJS(a.name)) {
+          // @ts-ignore
+          arr[i]['pos'] = 'z' + a.size;
+        }
+        if (isCSS(a.name)) {
+          // @ts-ignore
+          arr[i]['pos'] = 'y' + a.size;
+        }
+        if (isIMAGE(a.name)) {
+          // @ts-ignore
+          arr[i]['pos'] = 'x' + a.size;
+        }
+        if (isFONT(a.name)) {
+          // @ts-ignore
+          arr[i]['pos'] = 'w' + a.size;
+        }
+        if (isJSON(a.name)) {
+          // @ts-ignore
+          arr[i]['pos'] = 'v' + a.size;
+        }
+        if (isTXT(a.name)) {
+          // @ts-ignore
+          arr[i]['pos'] = 'u' + a.size;
+        }
+        const isKnown =
+          isJS(a.name) ||
+          isCSS(a.name) ||
+          isIMAGE(a.name) ||
+          isFONT(a.name) ||
+          isJSON(a.name) ||
+          isTXT(a.name);
+        return isKnown;
       })
       .sort((a, b) => {
-        if (isJS(a.name) && isCSS(b.name)) return -1;
-        if (isCSS(a.name) && isJS(b.name)) return 1;
-        return b.size - a.size;
+        // @ts-ignore
+        return b.pos - a.pos;
       });
 
     if (this.options.errors && json.errors.length) {
@@ -163,7 +167,7 @@ class LogFilesizeWebpackPlugin {
           .join(`\n`)
     );
     console.log(
-      `${ui.toString()}\n\n  ${chalk.gray(`Images and other types of assets omitted.`)}\n`
+      `${ui.toString()}\n\n  ${chalk.gray(`Assets other than js, css, image, font, json, and txt are omitted.`)}\n`
     );
     if (orderedAssets?.some((asset) => asset.suggested)) {
       console.log();
