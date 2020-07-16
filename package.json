@@ -22,7 +22,7 @@
     "url": "https://github.com/jsany/log-filesize-webpack-plugin/issues"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "registry": "https://npm.pkg.github.com/@jsany"
   },
   "keywords": [
     "log",
