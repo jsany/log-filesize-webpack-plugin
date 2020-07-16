@@ -4,9 +4,7 @@
   "description": "log assets size after webpack build(wirte by typescript)",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
-  "files": [
-    "lib"
-  ],
+  "files": ["lib"],
   "scripts": {
     "build": "rimraf lib/* && ttsc",
     "watch": "ttsc -w",
@@ -21,14 +19,8 @@
   "issues": {
     "url": "https://github.com/jsany/log-filesize-webpack-plugin/issues"
   },
-  "keywords": [
-    "log",
-    "assets",
-    "filesize",
-    "gzip",
-    "webpack",
-    "plugin"
-  ],
+  "publishConfig": { "registry": "https://npm.pkg.github.com/" },
+  "keywords": ["log", "assets", "filesize", "gzip", "webpack", "plugin"],
   "author": "jiangzhiguo2010",
   "license": "MIT",
   "bugs": {
@@ -42,12 +34,8 @@
     }
   },
   "lint-staged": {
-    "**/*.{js,ts,md,json}": [
-      "prettier --write"
-    ],
-    "package.json": [
-      "sort-package-json"
-    ]
+    "**/*.{js,ts,md,json}": ["prettier --write"],
+    "package.json": ["sort-package-json"]
   },
   "devDependencies": {
     "@babel/core": "^7.10.5",
