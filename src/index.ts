@@ -120,28 +120,32 @@ class LogFilesizeWebpackPlugin {
       })
       .sort((a, b) => {
         // @ts-ignore
-        return b.pos - a.pos;
+        return b.pos < a.pos ? -1 : 1;
       });
 
+    // console.log('== orderedAssets ==')
+    // console.log(orderedAssets)
+    // console.log('== orderedAssets ==')
+
     if (this.options.errors && json.errors.length) {
-      ui.div(chalk.red.bold('Error: ') + '\n' + json.errors.join('\n'));
+      ui.div(chalk.red.bold('Error: ') + '\n' + chalk.red(json.errors.join('\n')));
       ui.div('\n');
     }
     if (this.options.warnings && json.warnings.length) {
-      ui.div(chalk.yellow.bold('Warning: ') + '\n' + json.warnings.join('\n'));
+      ui.div(chalk.yellow.bold('Warning: ') + '\n' + chalk.yellow(json.warnings.join('\n')));
       ui.div('\n');
     }
     if (this.options.version) {
-      ui.div(chalk.white.bold('Version: ') + 'webpack ' + json.version);
+      ui.div(chalk.white.bold('Version: ') + chalk.white('webpack ' + json.version));
     }
     if (this.options.hash) {
-      ui.div(chalk.white.bold('Hash: ') + json.hash);
+      ui.div(chalk.white.bold('Hash: ') + chalk.white(json.hash));
     }
     if (this.options.time) {
-      ui.div(chalk.white.bold('Time: ') + json.time + 'ms');
+      ui.div(chalk.white.bold('Time: ') + chalk.white(json.time + 'ms'));
     }
     if (this.options.builtAt) {
-      ui.div(chalk.white.bold('Built At: ') + new Date(json.builtAt!));
+      ui.div(chalk.white.bold('Built At: ') + chalk.white(new Date(json.builtAt!)));
     }
     ui.div('\n');
     ui.div(
