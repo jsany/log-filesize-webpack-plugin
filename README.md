@@ -1,8 +1,8 @@
 <h1 align="center">Welcome to log-filesize-webpack-plugin 👋</h1>
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
+  <img alt="npm (scoped with tag)" src="https://img.shields.io/npm/v/@jsany/log-filesize-webpack-plugin/latest">
   <img src="https://img.shields.io/badge/node-%3E%3D8.10.0-blue.svg" />
-  <img alt="npm bundle size (scoped)" src="https://img.shields.io/bundlephobia/minzip/@jsany/log-filesize-webpack-plugin">
+  <img alt="npm bundle size (scoped version)" src="https://img.shields.io/bundlephobia/minzip/@jsany/log-filesize-webpack-plugin/latest">
   <a href="https://github.com/jsany/log-filesize-webpack-plugin#readme" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
@@ -14,13 +14,11 @@
   </a>
 </p>
 
-> log assets size after webpack build(wirte by typescript)
+> log assets size pretty after webpack build(wirte by typescript)
 
 ### 🏠 [Homepage](https://github.com/jsany/log-filesize-webpack-plugin#readme)
 
 ### ✨ [Demo](https://github.com/jsany/log-filesize-webpack-plugin/blob/main/example/webpack.config.js)
-
-![example](screenshots/example.png)
 
 ## Prerequisites
 
@@ -31,11 +29,12 @@
 
 ```sh
 yarn add -D @jsany/log-filesize-webpack-plugin
+# or npm install --save-dev @jsany/log-filesize-webpack-plugin
 ```
 
 ## Setup
 
-In `webpack.config.js`:
+### In `webpack.config.js`:
 
 ```js
 const LogFilesizeWebpackPlugin = require('@jsany/log-filesize-webpack-plugin');
@@ -53,6 +52,10 @@ module.exports = {
 }
 ```
 
+### Then run build, it will look like this:
+
+![example](screenshots/example.png)
+
 ## Options
 
 | Options    | Type    | Default             | Description                                                         |
@@ -68,7 +71,7 @@ module.exports = {
 
 ## Todo
 
-- [ ] Images and other types of assets
+- [ ] Images and other types of assets could be included
 
 ## Author
 
