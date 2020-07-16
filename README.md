@@ -41,11 +41,13 @@ In `webpack.config.js`:
 const LogFilesizeWebpackPlugin = require('@jsany/log-filesize-webpack-plugin');
 
 module.exports = {
+
+  stats: 'errors-only', // to close webpack print
   // ...
   plugins: [
     new LogFilesizeWebpackPlugin()
     // or
-    // new LogFilesizeWebpackPlugin({gzip: true,...Options})
+    // new LogFilesizeWebpackPlugin({gzip: true,...OtherOptions})
   ]
   // ...
 }

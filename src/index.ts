@@ -65,7 +65,7 @@ const makeRow = (a: string, b: string, c: string): string => {
 class LogFilesizeWebpackPlugin {
   private options: IOptions;
 
-  public constructor(options: IOptions) {
+  public constructor(options = {} as IOptions) {
     this.options = this.mergeOptions(options, defaultOptions);
   }
   public apply = (compiler: Compiler) => {
@@ -120,22 +120,24 @@ class LogFilesizeWebpackPlugin {
       });
 
     if (this.options.errors && json.errors.length) {
-      ui.div(chalk.red('Error: ') + '\n' + json.errors.join('\n'));
+      ui.div(chalk.red.bold('Error: ') + '\n' + json.errors.join('\n'));
+      ui.div('\n');
     }
     if (this.options.warnings && json.warnings.length) {
-      ui.div(chalk.yellow('Warning: ') + '\n' + json.warnings.join('\n'));
+      ui.div(chalk.yellow.bold('Warning: ') + '\n' + json.warnings.join('\n'));
+      ui.div('\n');
     }
     if (this.options.version) {
-      ui.div(chalk.white('Version: webpack ') + json.version);
+      ui.div(chalk.white.bold('Version: ') + 'webpack ' + json.version);
     }
     if (this.options.hash) {
-      ui.div(chalk.white('Hash: ') + json.hash);
+      ui.div(chalk.white.bold('Hash: ') + json.hash);
     }
     if (this.options.time) {
-      ui.div(chalk.white('Time: ') + json.time + 'ms');
+      ui.div(chalk.white.bold('Time: ') + json.time + 'ms');
     }
     if (this.options.builtAt) {
-      ui.div(chalk.white('Built At: ') + new Date(json.builtAt!));
+      ui.div(chalk.white.bold('Built At: ') + new Date(json.builtAt!));
     }
     ui.div('\n');
     ui.div(
