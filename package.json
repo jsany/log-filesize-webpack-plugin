@@ -23,7 +23,7 @@
   },
   "publishConfig": {
     "access": "public",
-    "registry": "https://npm.pkg.github.com/@jsany"
+    "registry": "https://registry.npmjs.org"
   },
   "keywords": [
     "log",
