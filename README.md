@@ -9,7 +9,7 @@
   <a href="https://github.com/jsany/log-filesize-webpack-plugin/graphs/commit-activity" target="_blank">
     <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
   </a>
-  <a href="https://github.com/jsany/log-filesize-webpack-plugin/blob/master/LICENSE" target="_blank">
+  <a href="https://github.com/jsany/log-filesize-webpack-plugin/blob/main/LICENSE" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" target="_blank" />
   </a>
 </p>
@@ -18,7 +18,9 @@
 
 ### 🏠 [Homepage](https://github.com/jsany/log-filesize-webpack-plugin#readme)
 
-### ✨ [Demo](https://github.com/jsany/log-filesize-example/blob/main/webpack.config.js#L168)
+### ✨ [Example](https://github.com/jsany/log-filesize-example)
+
+<https://github.com/jsany/log-filesize-example/blob/main/webpack.config.js#L168>
 
 ## Prerequisites
 
@@ -74,14 +76,19 @@ module.exports = {
 - [x] Support javascript
 - [x] Support css
 - [x] Support image
-- [x] Support image
 - [x] Support json
 - [x] Support font
 - [x] Support txt
 - [ ] Use file.type(MIME) instead of regexp
+- [ ] Support switch show javascript
+- [ ] Support switch show css
+- [ ] Support switch show image
+- [ ] Support switch show json
+- [ ] Support switch show font
+- [ ] Support switch show txt
 - [ ] ...
 
-### Support files with these extensions: [ext](./src/helper/fileType.ts)
+### Support files with these extensions: [ext look detail](./src/helper/fileType.ts)
 
 ## Author
 
@@ -92,7 +99,7 @@ module.exports = {
 
 ## 🤝 Contributing
 
-Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/jsany/log-filesize-webpack-plugin/issues). You can also take a look at the [contributing guide](https://github.com/jsany/log-filesize-webpack-plugin/blob/master/CONTRIBUTING.md).
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/jsany/log-filesize-webpack-plugin/issues). You can also take a look at the [contributing guide](https://github.com/jsany/log-filesize-webpack-plugin/blob/main/CONTRIBUTING.md).
 
 ## Show your support
 
@@ -101,7 +108,7 @@ Give a ⭐️ if this project helped you!
 ## 📝 License
 
 Copyright © 2020 [jiangzhiguo2010](https://github.com/jsany).<br />
-This project is [MIT](https://github.com/jsany/log-filesize-webpack-plugin/blob/master/LICENSE) licensed.
+This project is [MIT](https://github.com/jsany/log-filesize-webpack-plugin/blob/main/LICENSE) licensed.
 
 ---
 

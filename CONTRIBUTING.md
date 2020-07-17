@@ -2,12 +2,12 @@
 
 ## Step
 
-### 1. Fork this project
+### 1. Fork this project <https://github.com/jsany/log-filesize-webpack-plugin>
 
 ### 2. Clone your fork project to the local
 
 ```sh
-git clone https://github.com/jsany/log-filesize-webpack-plugin.git
+git clone https://github.com/{your-github-name}/log-filesize-webpack-plugin.git
 ```
 
 ### 3. Install deps
@@ -17,7 +17,7 @@ cd log-filesize-webpack-plugin
 yarn install
 ```
 
-### 4. Make changes, if your changes include methods or functions, please remember to modify the README and example file
+### 4. Make changes, if your changes include methods or functions, please remember to modify the README
 
 ### 5. Compile
 
@@ -30,7 +30,7 @@ yarn build
 ```sh
 yarn link
 
-cd [your-test-target-project]
+cd {your-test-target-project}
 yarn link @jsany/log-filesize-webpack-plugin
 # then webpack build use log-filesize-webpack-plugin
 ```
