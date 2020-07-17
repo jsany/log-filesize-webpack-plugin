@@ -4,7 +4,7 @@
  * @param {number} min - 区间最小值,默认为0
  * @param {bool} int - 是否为整数,默认为true,即整数
  */
-export const generateRandom = (max, min = 0, int = true) => {
+export const generateRandom = (max: number, min = 0, int = true): number => {
   min = Math.ceil(min);
   max = Math.floor(max);
   const res = Math.random() * (max - min + 1) + min;

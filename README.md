@@ -78,6 +78,7 @@ module.exports = {
 - [x] Support json
 - [x] Support font
 - [x] Support txt
+- [ ] Use file.type(MIME) instead of regexp
 - [ ] ...
 
 ### Support files with these extensions: [ext](./src/helper/fileType.ts)

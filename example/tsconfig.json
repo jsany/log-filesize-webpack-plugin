@@ -1,25 +1,26 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ESNext",
     "module": "commonjs",
-    "lib": ["ES2015","ESNext"],
+    "lib": ["ES2015","ESNext","DOM","DOM.Iterable","ScriptHost"],
     "outDir": "lib",
     "strict": true,
     "moduleResolution": "node",
     "declaration": true,
-    "baseUrl": "./src",
+    "baseUrl": "./",
     "paths": {
-      "@/*": ["./*"], // src 目录别名
-      "@@/*": ["../*"], // 根目录别名
+      "@/*": ["./src/*"], // src 目录别名
     },
-    "plugins": [{ "transform": "typescript-transform-paths" }],
     "pretty": true,
+    "allowJs": true,
+    "jsx": "react",
+    "resolveJsonModule": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "skipLibCheck": true,
     "removeComments": true
   },
-  "include": ["src/**/*", "typings.d.ts"],
+  "include": ["./src/**/*", "./typings.d.ts"],
   "exclude": [
     "node_modules",
     "**/test/*",
@@ -28,7 +29,6 @@
     "lib",
     "es",
     "dist",
-    "build",
-    "example"
+    "build"
   ]
 }

@@ -4,13 +4,13 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
+const WebpackBar = require('webpackbar');
 const LogFilesizeWebpackPlugin = require('../lib/index');
 
 module.exports = {
   mode: process.env.NODE_ENV,
-  // mode: 'production',
   entry: {
-    index: resolve(__dirname, './src/index.js')
+    index: resolve(__dirname, './src/index.tsx')
   },
   output: {
     path: resolve(__dirname, '../dist'),
@@ -20,15 +20,13 @@ module.exports = {
   stats: 'none',
   
   resolve: {
-    alias: {
-      '@/': resolve(__dirname, './src/'),
-    },
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
 
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.js(x?)$/,
         include: resolve(__dirname, './src'),
         use: [
           {
@@ -60,7 +58,20 @@ module.exports = {
         ]
       },
       {
+        test: /\.ts(x?)$/,
+        include: resolve(__dirname, './src'),
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript'],
+            },
+          },
+        ],
+      },
+      {
         test: /\.(le|c)ss$/,
+        include: resolve(__dirname, './src'),
         use: [
           MiniCssExtractPlugin.loader,
           {
@@ -85,7 +96,7 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|jpeg|gif|svg|svga)$/,
-        exclude: /(node_modules|bower_components)/,
+        include: resolve(__dirname, './src'),
         use: [
           {
             // 需要下载file-loader和url-loader
@@ -100,7 +111,7 @@ module.exports = {
       },
       {
         test: /[\\.](woff2?|eot|ttf|otf)$/,
-        exclude: /(node_modules|bower_components)/,
+        include: resolve(__dirname, './src'),
         loader: 'url-loader',
         options: {
           limit: 10000
@@ -136,6 +147,7 @@ module.exports = {
         safe: true
       }
     }),
+    new WebpackBar(),
     // 分离css
     new MiniCssExtractPlugin({
       // Options similar to the same options in webpackOptions.output
@@ -144,6 +156,6 @@ module.exports = {
       chunkFilename: 'css/[id].[contenthash:6].css'
     }),
     new ManifestPlugin(),
-    new LogFilesizeWebpackPlugin({ gzip: true })
+    new LogFilesizeWebpackPlugin()
   ]
 };

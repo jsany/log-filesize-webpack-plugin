@@ -37,6 +37,17 @@ const defaultOptions: IOptions = {
   maxSize: 1.8 * 1024 * 1024
 };
 
+const getKnownType = (val: string) => {
+  if(isJS(val)) return 'js';
+  if(isCSS(val)) return 'css';
+  if(isIMAGE(val)) return 'image';
+  if(isFONT(val)) return 'font';
+  if(isJSON(val)) return 'json';
+  if(isTXT(val)) return 'txt';
+  // return void 0;
+  return undefined;
+}
+
 class LogFilesizeWebpackPlugin {
   private options: IOptions;
 
@@ -44,6 +55,10 @@ class LogFilesizeWebpackPlugin {
     this.options = this.mergeOptions(options, defaultOptions);
   }
   public apply = (compiler: Compiler) => {
+
+    compiler.hooks.afterEmit.tap('LogFilesizeWebpackPlugin', compilation => {
+      // TODO: use file.type(MIME) instead of regexp
+    })
     compiler.hooks.done.tap('LogFilesizeWebpackPlugin', (stats) => {
       // console.log('===== done =====');
       // console.log(stats);
@@ -79,36 +94,41 @@ class LogFilesizeWebpackPlugin {
           suggested: isLarge && isJS(a.name)
         };
       })
-      .filter((a, i, arr) => {
+      .filter((a,i,arr) => {
         if (seenNames.has(a.name)) {
           return false;
         }
         seenNames.set(a.name, true);
 
-        if (isJS(a.name)) {
-          // @ts-ignore
-          arr[i]['pos'] = 'z' + a.size;
+        switch (getKnownType(a.name)){
+          case 'js':
+            // @ts-ignore
+            arr[i]['pos'] = 6e10 + a.size;
+            break;
+          case 'css':
+            // @ts-ignore
+            arr[i]['pos'] = 5e10 + a.size;
+            break;
+          case 'image':
+            // @ts-ignore
+            arr[i]['pos'] = 4e10 + a.size;
+            break;
+          case 'font':
+            // @ts-ignore
+            arr[i]['pos'] = 3e10 + a.size;
+            break;
+          case 'json':
+            // @ts-ignore
+            arr[i]['pos'] = 2e10 + a.size;
+            break;
+          case 'txt':
+            // @ts-ignore
+            arr[i]['pos'] = 1e10 + a.size;
+            break;
+          default:
+            break;
         }
-        if (isCSS(a.name)) {
-          // @ts-ignore
-          arr[i]['pos'] = 'y' + a.size;
-        }
-        if (isIMAGE(a.name)) {
-          // @ts-ignore
-          arr[i]['pos'] = 'x' + a.size;
-        }
-        if (isFONT(a.name)) {
-          // @ts-ignore
-          arr[i]['pos'] = 'w' + a.size;
-        }
-        if (isJSON(a.name)) {
-          // @ts-ignore
-          arr[i]['pos'] = 'v' + a.size;
-        }
-        if (isTXT(a.name)) {
-          // @ts-ignore
-          arr[i]['pos'] = 'u' + a.size;
-        }
+
         const isKnown =
           isJS(a.name) ||
           isCSS(a.name) ||
@@ -120,7 +140,7 @@ class LogFilesizeWebpackPlugin {
       })
       .sort((a, b) => {
         // @ts-ignore
-        return b.pos < a.pos ? -1 : 1;
+        return b.pos - a.pos;
       });
 
     // console.log('== orderedAssets ==')
