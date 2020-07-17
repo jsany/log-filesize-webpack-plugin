@@ -18,7 +18,7 @@
 
 ### 🏠 [Homepage](https://github.com/jsany/log-filesize-webpack-plugin#readme)
 
-### ✨ [Demo](https://github.com/jsany/log-filesize-webpack-plugin/blob/main/example/webpack.config.js)
+### ✨ [Demo](https://github.com/jsany/log-filesize-example/blob/main/webpack.config.js#L168)
 
 ## Prerequisites
 
