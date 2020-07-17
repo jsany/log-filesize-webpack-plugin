@@ -41,7 +41,7 @@ const LogFilesizeWebpackPlugin = require('@jsany/log-filesize-webpack-plugin');
 
 module.exports = {
 
-  stats: 'errors-only', // to close webpack print
+  stats: 'none', // to close webpack print
   // ...
   plugins: [
     new LogFilesizeWebpackPlugin()
@@ -71,7 +71,16 @@ module.exports = {
 
 ## Todo
 
-- [ ] Images and other types of assets could be included
+- [x] Support javascript
+- [x] Support css
+- [x] Support image
+- [x] Support image
+- [x] Support json
+- [x] Support font
+- [x] Support txt
+- [ ] ...
+
+### Support files with these extensions: [ext](./src/helper/fileType.ts)
 
 ## Author
 

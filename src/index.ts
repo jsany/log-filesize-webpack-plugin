@@ -156,22 +156,38 @@ class LogFilesizeWebpackPlugin {
       ) +
         `\n\n` +
         orderedAssets
-          ?.map((asset) =>
-            makeRow(
-              /js$/.test(asset.name)
-                ? asset.suggested
-                  ? // warning for large bundle
-                    chalk.yellow(join(dir, asset.name))
-                  : chalk.green(join(dir, asset.name))
-                : chalk.blue(join(dir, asset.name)),
-              filesize(asset.size),
-              (this.options.gzip && getGzippedSize(asset, dir)) || ''
+          ?.map((asset) =>{
+            let row1 = join(dir, asset.name);
+            const row2 = filesize(asset.size);
+            const row3 = (this.options.gzip && getGzippedSize(asset, dir)) || '';
+            if(isJS(asset.name)){
+              row1 = asset.suggested ? chalk.yellow(row1) : chalk.green(row1)
+            }
+            if(isCSS(asset.name)){
+              row1 = chalk.blue(row1)
+            }
+            if(isIMAGE(asset.name)){
+              row1 = chalk.magenta(row1)
+            }
+            if(isFONT(asset.name)){
+              row1 = chalk.cyan(row1)
+            }
+            if(isJSON(asset.name)){
+              row1 = chalk.gray(row1)
+            }
+            if(isTXT(asset.name)){
+              row1 = chalk.white(row1)
+            }
+            return makeRow(
+              row1,
+              row2,
+              row3
             )
-          )
+          })
           .join(`\n`)
     );
     console.log(
-      `${ui.toString()}\n\n  ${chalk.gray(`Assets other than js, css, image, font, json, and txt are omitted.`)}\n`
+      `${ui.toString()}\n\n  ${chalk.gray.inverse(`🚨 Assets other than js, css, image, font, json, and txt are omitted.`)}\n`
     );
     if (orderedAssets?.some((asset) => asset.suggested)) {
       console.log();
