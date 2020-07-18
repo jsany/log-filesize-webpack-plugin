@@ -24,6 +24,6 @@ module.exports = {
     'no-param-reassign': 1,
     '@typescript-eslint/no-invalid-this': 1,
     '@typescript-eslint/no-require-imports': 1,
-    '@typescript-eslint/consistent-type-assertions': 1,
+    '@typescript-eslint/consistent-type-assertions': 1
   }
 };

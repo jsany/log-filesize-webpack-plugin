@@ -1,4 +1,3 @@
-
 export default (bytes: number) => {
   bytes = Math.abs(bytes);
   const radix = 1024;
