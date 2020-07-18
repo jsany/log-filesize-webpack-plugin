@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.3](https://github.com/jsany/log-filesize-webpack-plugin/compare/v1.1.2...v1.1.3) (2020-07-18)
+
+### Bug Fixes
+
+- support unitTest ([#2](https://github.com/jsany/log-filesize-webpack-plugin/issues/2)) ([b8020f8](https://github.com/jsany/log-filesize-webpack-plugin/commit/b8020f81d2dc55a1e65e5c00007e26ce1a69c9d1))
+
 ### [1.1.2](https://github.com/jsany/log-filesize-webpack-plugin/compare/v1.1.1...v1.1.2) (2020-07-17)
 
 ### [1.1.1](https://github.com/jsany/log-filesize-webpack-plugin/compare/v1.1.0...v1.1.1) (2020-07-17)
