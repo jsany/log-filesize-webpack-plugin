@@ -3,6 +3,7 @@
   <img alt="npm (scoped with tag)" src="https://img.shields.io/npm/v/@jsany/log-filesize-webpack-plugin/latest">
   <img src="https://img.shields.io/badge/node-%3E%3D8.10.0-blue.svg" />
   <img alt="npm bundle size (scoped version)" src="https://img.shields.io/bundlephobia/minzip/@jsany/log-filesize-webpack-plugin/latest">
+  <img alt="Coveralls github" src="https://img.shields.io/coveralls/github/jsany/log-filesize-webpack-plugin">
   <a href="https://github.com/jsany/log-filesize-webpack-plugin#readme" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
@@ -42,7 +43,6 @@ yarn add -D @jsany/log-filesize-webpack-plugin
 const LogFilesizeWebpackPlugin = require('@jsany/log-filesize-webpack-plugin');
 
 module.exports = {
-
   stats: 'none', // to close webpack print
   // ...
   plugins: [
@@ -51,7 +51,7 @@ module.exports = {
     // new LogFilesizeWebpackPlugin({gzip: true,...OtherOptions})
   ]
   // ...
-}
+};
 ```
 
 ### Then run build, it will look like this:

@@ -19,7 +19,7 @@
   "scripts": {
     "build": "rimraf lib/* && ttsc",
     "release": "standard-version",
-    "test": "jest --runInBand",
+    "test": "jest --runInBand --coverage",
     "watch": "ttsc -w"
   },
   "husky": {
