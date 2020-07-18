@@ -27,6 +27,14 @@ yarn build
 
 ### 6. Test
 
+unitTest:
+
+```sh
+yarn test
+```
+
+or use you local project to test:
+
 ```sh
 yarn link
 
