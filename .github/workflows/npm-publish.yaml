@@ -1,0 +1,84 @@
+name: Node.js Package
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  build:
+    name: Test on node ${{ matrix.node_version }} and ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        node_version: ["8", "10", "12"]
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+    env:
+      OS: ${{ matrix.os }}
+      NODE: 10
+
+    steps:
+      - name: Checkout code
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - uses: ./.github/actions/yarn-cache.yaml
+
+      - name: Use Node.js ${{ matrix.node_version }}
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node_version }}
+      - name: Npm install, build, and test
+        run: |
+          yarn install
+          yarn build
+          yarn test
+      - name: Use Node.js ${{ jobs.build.env.NODE }} coverage
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ jobs.build.env.NODE }}
+      - name: Npm install, build, and coverage
+        run: |
+          yarn install
+          yarn build
+          yarn coverage
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          # not required for public repos
+          # token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./coverage/clover.xml
+          directory: ./coverage/lcov-report/
+          flags: unittests
+          env_vars: OS,NODE
+          name: codecov-umbrella
+          fail_ci_if_error: true
+          path_to_write_report: ./coverage/codecov_report.gz
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - uses: ./.github/actions/yarn-cache.yaml
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
+      - name: Npm install, and build
+        run: |
+          yarn install
+          yarn build
+      - name: Publish to npm
+        run: yarn publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPMJS_TOKEN}}
+      - uses: actions/setup-node@v1
+        with:
+          registry-url: https://npm.pkg.github.com/
+      - name: Publish to github package
+        run: yarn publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}

@@ -18,9 +18,10 @@
   "files": ["lib"],
   "scripts": {
     "build": "rimraf lib/* && ttsc",
+    "coverage": "jest --runInBand --coverage",
     "prettier": "prettier -c --write \"**/*.{js,ts,md,json}\"",
     "release": "standard-version",
-    "test": "jest --runInBand --coverage",
+    "test": "jest --runInBand",
     "watch": "ttsc -w"
   },
   "husky": {
