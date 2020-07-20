@@ -1,7 +1,7 @@
 import { tuple } from '@/helper/type';
-export type TKnownType = 'js' | 'css' | 'image' | 'font' | 'json' | 'txt' | 'html';
 
 export const knownTypes = tuple('js', 'css', 'image', 'font', 'json', 'txt', 'html');
+export type TKnownType = typeof knownTypes[number];
 
 export type TMimeMap = Record<TKnownType, string[]>;
 
