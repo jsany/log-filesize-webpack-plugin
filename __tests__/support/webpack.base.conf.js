@@ -110,7 +110,7 @@ module.exports = {
           priority: -20
         },
         vendors: {
-          test: /[\\/]node_modules[\\/](react|react-dom|(\@babel)|core-js)[\\/]/,
+          test: /[\\/]node_modules[\\/](react|react-dom|scheduler|prop-types|(\@babel)|core-js)[\\/]/,
           chunks: 'initial',
           name: 'vendor',
           priority: -10

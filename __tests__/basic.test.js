@@ -56,7 +56,7 @@ describe('LogFilesizeWebpackPlugin', () => {
     };
     config.output = {
       path: OUTPUT_DIR,
-      filename: 'js/[name].[contenthash:6].js',
+      filename: 'js/[name].[chunkhash:6].js',
       chunkFilename: 'js/[name].[chunkhash:6].js'
     };
     config.plugins.push(log);
