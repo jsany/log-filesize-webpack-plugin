@@ -4,9 +4,11 @@ import chalk from 'chalk';
 import filesize from '@/helper/filesize';
 import getGzippedSize from '@/helper/getGzippedSize';
 import makeRow from '@/helper/makeRow';
-import { isJS, isCSS, isIMAGE, isFONT, isJSON, isTXT } from '@/helper/fileType';
 const ui = require('cliui')({ with: 80 });
+import mime from '@/helper/definedMime';
+import { TKnownType, knownTypes } from '@/helper/mimeMap';
 
+export type TPriority = Partial<Record<TKnownType, number>>;
 export interface IOptions {
   /* Switch log gzipped filesize */
   gzip?: boolean;
@@ -24,22 +26,24 @@ export interface IOptions {
   builtAt?: boolean;
   /* These js sizes are pretty large. We'll warn for bundles exceeding them. */
   maxSize: number;
+  /* The larger the value, the higher the sort, and hide if less than zero */
+  priority?: TPriority;
 }
 export interface IStatus {
   msg: 'success' | 'error' | 'norun';
   data: any;
 }
 
-const getKnownType = (val: string) => {
-  if (isJS(val)) return 'js';
-  if (isCSS(val)) return 'css';
-  if (isIMAGE(val)) return 'image';
-  if (isFONT(val)) return 'font';
-  if (isJSON(val)) return 'json';
-  if (isTXT(val)) return 'txt';
-  // return void 0;
-  return undefined;
-};
+export interface IAssetMeta {
+  name: string;
+  type: TKnownType;
+  size: number;
+
+  gzipped?: number;
+
+  suggested?: boolean;
+  priority?: number;
+}
 
 class LogFilesizeWebpackPlugin {
   public static defaultOptions: IOptions = {
@@ -50,23 +54,67 @@ class LogFilesizeWebpackPlugin {
     version: true,
     time: true,
     builtAt: true,
-    maxSize: 1.8 * 1024 * 1024
+    maxSize: 1.8 * 1024 * 1024,
+    priority: {
+      js: 10,
+      css: 9,
+      image: 8,
+      font: 7,
+      json: 6,
+      txt: 5,
+      html: 4
+    }
   };
   public options: IOptions;
 
   public status: IStatus;
+  public assetsCache: IAssetMeta[];
 
   public constructor(options = {} as IOptions) {
     this.options = this.mergeOptions(options, LogFilesizeWebpackPlugin.defaultOptions);
     this.status = { msg: 'norun', data: 'printfStats havent run' };
+    this.assetsCache = [];
   }
   public apply = (compiler: Compiler) => {
     compiler.hooks.afterEmit.tap('LogFilesizeWebpackPlugin', (compilation) => {
-      // TODO: use file.type(MIME) instead of regexp
+      // DONE: use file.type(MIME) instead of regexp
+      // console.log('===== compilation =====');
+      const { assets } = compilation;
+      const seenNames = new Map();
+      this.assetsCache = Object.keys(assets)
+        .filter((item) => {
+          if (seenNames.has(item)) {
+            return false;
+          }
+          seenNames.set(item, true);
+          const type = mime.getType(item) as TKnownType;
+          const priority = this.options.priority?.[type];
+          return knownTypes.includes(type) && priority! > 0;
+        })
+        .map((item) => {
+          const source = assets[item].source();
+          const name = item;
+          const type = mime.getType(name) as TKnownType;
+          const size = assets[item].size() as number;
+          const gzipped = (this.options.gzip && getGzippedSize(source)) || undefined;
+          const priority = this.options.priority?.[type];
+          const isLarge = size > this.options.maxSize;
+
+          return { name, type, size, gzipped, priority, suggested: isLarge && type === 'js' };
+        })
+        .sort((a, b) => {
+          if (a.type === b.type) {
+            return b.size - a.size;
+          } else {
+            return b.priority! - a.priority!;
+          }
+        });
+      // console.log('===== compilation =====');
     });
     compiler.hooks.done.tap('LogFilesizeWebpackPlugin', (stats) => {
       // console.log('===== done =====');
-      // console.log(stats);
+      // // console.log(stats);
+      // // console.log(this.assetsCache)
       // console.log('===== done =====');
       this.printfStats(stats);
     });
@@ -82,76 +130,6 @@ class LogFilesizeWebpackPlugin {
       // console.log(json);
       // console.log('===== printfStats =====');
       const dir = relative(process.cwd(), json.outputPath || '');
-      const assets = json.assets
-        ? json.assets
-        : // @ts-ignore
-          json?.children?.reduce((acc, child) => acc.concat(child?.assets), []);
-
-      const seenNames = new Map();
-
-      const orderedAssets = assets
-        ?.map((a) => {
-          a.name = a.name.split('?')[0];
-          // These sizes are pretty large
-          const maxRecommendedSize = this.options.maxSize;
-          const isLarge = maxRecommendedSize && a.size > maxRecommendedSize;
-          return {
-            ...a,
-            suggested: isLarge && isJS(a.name)
-          };
-        })
-        .filter((a, i, arr) => {
-          if (seenNames.has(a.name)) {
-            return false;
-          }
-          seenNames.set(a.name, true);
-
-          switch (getKnownType(a.name)) {
-            case 'js':
-              // @ts-ignore
-              arr[i]['pos'] = 6e10 + a.size;
-              break;
-            case 'css':
-              // @ts-ignore
-              arr[i]['pos'] = 5e10 + a.size;
-              break;
-            case 'image':
-              // @ts-ignore
-              arr[i]['pos'] = 4e10 + a.size;
-              break;
-            case 'font':
-              // @ts-ignore
-              arr[i]['pos'] = 3e10 + a.size;
-              break;
-            case 'json':
-              // @ts-ignore
-              arr[i]['pos'] = 2e10 + a.size;
-              break;
-            case 'txt':
-              // @ts-ignore
-              arr[i]['pos'] = 1e10 + a.size;
-              break;
-            default:
-              break;
-          }
-
-          const isKnown =
-            isJS(a.name) ||
-            isCSS(a.name) ||
-            isIMAGE(a.name) ||
-            isFONT(a.name) ||
-            isJSON(a.name) ||
-            isTXT(a.name);
-          return isKnown;
-        })
-        .sort((a, b) => {
-          // @ts-ignore
-          return b.pos - a.pos;
-        });
-
-      // console.log('== orderedAssets ==')
-      // console.log(orderedAssets)
-      // console.log('== orderedAssets ==')
 
       if (this.options.errors && json.errors.length) {
         ui.div(chalk.red.bold('Error: ') + '\n' + chalk.red(json.errors.join('\n')));
@@ -181,28 +159,35 @@ class LogFilesizeWebpackPlugin {
           (this.options.gzip && chalk.cyan.bold(`Gzipped`)) || ''
         ) +
           `\n\n` +
-          orderedAssets
+          this.assetsCache
             ?.map((asset) => {
               let row1 = join(dir, asset.name);
               const row2 = filesize(asset.size);
-              const row3 = (this.options.gzip && getGzippedSize(asset, dir)) || '';
-              if (isJS(asset.name)) {
-                row1 = asset.suggested ? chalk.yellow(row1) : chalk.green(row1);
-              }
-              if (isCSS(asset.name)) {
-                row1 = chalk.blue(row1);
-              }
-              if (isIMAGE(asset.name)) {
-                row1 = chalk.magenta(row1);
-              }
-              if (isFONT(asset.name)) {
-                row1 = chalk.cyan(row1);
-              }
-              if (isJSON(asset.name)) {
-                row1 = chalk.gray(row1);
-              }
-              if (isTXT(asset.name)) {
-                row1 = chalk.white(row1);
+              const row3 = (this.options.gzip && filesize(asset.gzipped!)) || '';
+              switch (asset.type) {
+                case 'js':
+                  row1 = asset.suggested ? chalk.yellow(row1) : chalk.green(row1);
+                  break;
+                case 'css':
+                  row1 = chalk.blue(row1);
+                  break;
+                case 'image':
+                  row1 = chalk.magenta(row1);
+                  break;
+                case 'font':
+                  row1 = chalk.cyan(row1);
+                  break;
+                case 'json':
+                  row1 = chalk.gray(row1);
+                  break;
+                case 'txt':
+                  row1 = chalk.white(row1);
+                  break;
+                case 'html':
+                  row1 = chalk.red(row1);
+                  break;
+                default:
+                  break;
               }
               return makeRow(row1, row2, row3);
             })
@@ -210,10 +195,12 @@ class LogFilesizeWebpackPlugin {
       );
       console.log(
         `${ui.toString()}\n\n  ${chalk.gray.inverse(
-          `🚨 Assets other than js, css, image, font, json, and txt are omitted.`
+          `🚨 Assets other than ${knownTypes.slice(0, -1).join(', ')} and ${knownTypes.slice(
+            -1
+          )} are omitted.`
         )}\n`
       );
-      if (orderedAssets?.some((asset) => asset.suggested)) {
+      if (this.assetsCache?.some((asset) => asset.suggested)) {
         console.log(chalk.yellow('The bundle size is significantly larger than recommended.'));
         console.log(
           chalk.yellow(
@@ -221,7 +208,7 @@ class LogFilesizeWebpackPlugin {
           )
         );
       }
-      this.status = { msg: 'success', data: orderedAssets };
+      this.status = { msg: 'success', data: this.assetsCache };
     } catch (err) {
       this.status = { msg: 'error', data: err };
       throw new Error(err);
@@ -230,12 +217,15 @@ class LogFilesizeWebpackPlugin {
 
   public mergeOptions = (options: IOptions, defaults: IOptions): IOptions => {
     try {
-      for (const key in defaults) {
-        if (options.hasOwnProperty(key)) {
-          (defaults as any)[key] = (options as any)[key];
-        }
-      }
-      return defaults;
+      const { priority: optionsPriority, ...optionsRest } = options;
+      const { priority: defaultPriority, ...defaultRest } = defaults;
+
+      Object.assign(defaultPriority, optionsPriority);
+      Object.assign(defaultRest, optionsRest, { priority: defaultPriority });
+      // console.log('===== defaultRest =====');
+      // console.log(defaultRest)
+      // console.log('===== defaultRest =====');
+      return defaultRest;
     } catch (err) {
       throw new Error(err);
     }

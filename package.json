@@ -36,6 +36,7 @@
   "dependencies": {
     "chalk": "^4.1.0",
     "cliui": "^6.0.0",
+    "mime": "^2.4.6",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.12"
   },
@@ -49,6 +50,7 @@
     "@commitlint/cli": "^9.1.1",
     "@commitlint/config-conventional": "^9.1.1",
     "@types/jest": "^26.0.4",
+    "@types/mime": "^2.0.2",
     "@types/node": "^14.0.23",
     "@types/rimraf": "^3.0.0",
     "@types/webpack": "^4.41.21",

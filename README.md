@@ -60,35 +60,35 @@ module.exports = {
 
 ## Options
 
-| Options    | Type    | Default                    | Description                                                         |
-| ---------- | ------- | -------------------------- | ------------------------------------------------------------------- |
-| `gzip`     | boolean | `true`                     | Print gzipped filesize                                              |
-| `errors`   | boolean | `true`                     | Print compile errors                                                |
-| `warnings` | boolean | `true`                     | Print compile warnings                                              |
-| `hash`     | boolean | `true`                     | Print current compile hash                                          |
-| `version`  | boolean | `true`                     | Print current webpack version                                       |
-| `time`     | boolean | `true`                     | Print compile cost time                                             |
-| `builtAt`  | boolean | `true`                     | Print when to start compiling                                       |
-| `maxSize`  | number  | `1.8 * 1024 * 1024` (Byte) | These sizes are pretty large. We'll warn for bundles exceeding them |
+| Options    | Type                                                                                               | Default                                                     | Description                                                           |
+| ---------- | -------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- | --------------------------------------------------------------------- |
+| `gzip`     | boolean                                                                                            | `true`                                                      | Print gzipped filesize                                                |
+| `errors`   | boolean                                                                                            | `true`                                                      | Print compile errors                                                  |
+| `warnings` | boolean                                                                                            | `true`                                                      | Print compile warnings                                                |
+| `hash`     | boolean                                                                                            | `true`                                                      | Print current compile hash                                            |
+| `version`  | boolean                                                                                            | `true`                                                      | Print current webpack version                                         |
+| `time`     | boolean                                                                                            | `true`                                                      | Print compile cost time                                               |
+| `builtAt`  | boolean                                                                                            | `true`                                                      | Print when to start compiling                                         |
+| `maxSize`  | number                                                                                             | `1.8 * 1024 * 1024` (Byte)                                  | These sizes are pretty large. We'll warn for bundles exceeding them   |
+| `priority` | { js?: number, css?: number,image?: number,font?: number,json?: number,txt?: number,html?: number} | `{ js: 10, css: 9,image: 8,font: 7,json: 6,txt: 5,html: 4}` | The larger the value, the higher the sort, and hide if less than zero |
+
+## Feature
+
+- [x] Support javascript and switch log it
+- [x] Support css and switch log it
+- [x] Support image and switch log it
+- [x] Support json and switch log it
+- [x] Support font and switch log it
+- [x] Support txt and switch log it
+- [x] Support html and switch log it
+- [x] Support custom assets log priority
 
 ## Todo
 
-- [x] Support javascript
-- [x] Support css
-- [x] Support image
-- [x] Support json
-- [x] Support font
-- [x] Support txt
-- [ ] Use file.type(MIME) instead of regexp
-- [ ] Support switch show javascript
-- [ ] Support switch show css
-- [ ] Support switch show image
-- [ ] Support switch show json
-- [ ] Support switch show font
-- [ ] Support switch show txt
+- [ ] Support custom file color
 - [ ] ...
 
-### Support files with these extensions: [ext look detail](./src/helper/fileType.ts)
+### Support files with these extensions: [ext look detail](./src/helper/mimeMap.ts)
 
 ## Author
 
