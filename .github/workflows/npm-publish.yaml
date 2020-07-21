@@ -32,12 +32,9 @@ jobs:
   coverage:
     needs: test
     name: Generate coverage
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
+    runs-on: ubuntu-latest
     env:
-      OS: ${{ matrix.os }}
+      OS: ubuntu-latest
       NODE: 10
     steps:
       - name: Checkout code
@@ -47,7 +44,7 @@ jobs:
 
       - uses: actions/setup-node@v1
         with:
-          node-version: ${{ jobs.coverage.env.NODE }}
+          node-version: 10
 
       - name: Npm install, build, and coverage
         run: |
@@ -92,7 +89,7 @@ jobs:
 
       - uses: actions/setup-node@v1
         with:
-          node-version: ${{ jobs.build.env.NODE }}
+          node-version: 10
           registry-url: https://registry.npmjs.org/
 
       - name: Npm install, and build
@@ -107,7 +104,7 @@ jobs:
 
       - uses: actions/setup-node@v1
         with:
-          node-version: ${{ jobs.build.env.NODE }}
+          node-version: 10
           registry-url: https://npm.pkg.github.com/
 
       - name: Publish to github package
