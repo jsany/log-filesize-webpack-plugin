@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.3](https://github.com/jsany/log-filesize-webpack-plugin/compare/v1.2.2...v1.2.3) (2020-07-21)
+
+### Bug Fixes
+
+- use persional token to trigger event(https://github.com/actions/create-release/issues/52) ([6253fab](https://github.com/jsany/log-filesize-webpack-plugin/commit/6253fabcfa3adf307e03e43f16cbef7ee1253d1e))
+
 ### [1.2.2](https://github.com/jsany/log-filesize-webpack-plugin/compare/v1.2.1...v1.2.2) (2020-07-21)
 
 ### Bug Fixes
