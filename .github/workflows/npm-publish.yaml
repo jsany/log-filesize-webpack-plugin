@@ -1,57 +1,57 @@
-name: Node.js Package
+name: Publish Package
 
 on:
   release:
     types: [created]
 
 jobs:
-  build:
+  test:
     name: Test on node ${{ matrix.node_version }} and ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         node_version: ["8", "10", "12"]
         os: [ubuntu-latest, windows-latest, macOS-latest]
-    env:
-      OS: ${{ matrix.os }}
-      NODE: 10
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
           fetch-depth: 1
-      - name: Cache node modules
-        uses: actions/cache@v2
-        env:
-          cache-name: cache-node-modules
-        with:
-          # yarn cache files are stored in `~/.yarn` on Linux/macOS
-          path: ~/.yarn
-          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
 
       - name: Use Node.js ${{ matrix.node_version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node_version }}
-      - name: Npm install, build, and test
+
+      - name: Npm install, build and test
         run: |
           yarn install
           yarn build
           yarn test
-      - name: Use Node.js ${{ jobs.build.env.NODE }} coverage
-        uses: actions/setup-node@v1
+
+  coverage:
+    needs: test
+    name: Generate coverage
+    runs-on: ubuntu-latest
+    env:
+      OS: ${{ runner.os }}
+      NODE: 10
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
         with:
-          node-version: ${{ jobs.build.env.NODE }}
+          fetch-depth: 1
+
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ jobs.coverage.env.NODE }}
+
       - name: Npm install, build, and coverage
         run: |
           yarn install
           yarn build
           yarn coverage
+
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
         with:
@@ -66,13 +66,14 @@ jobs:
           path_to_write_report: ./coverage/codecov_report.gz
 
   publish:
-    needs: build
+    needs: coverage
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
           fetch-depth: 1
+
       - name: Cache node modules
         uses: actions/cache@v2
         env:
@@ -88,19 +89,24 @@ jobs:
 
       - uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: ${{ jobs.build.env.NODE }}
           registry-url: https://registry.npmjs.org/
+
       - name: Npm install, and build
         run: |
           yarn install
           yarn build
+
       - name: Publish to npm
         run: yarn publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPMJS_TOKEN}}
+
       - uses: actions/setup-node@v1
         with:
+          node-version: ${{ jobs.build.env.NODE }}
           registry-url: https://npm.pkg.github.com/
+
       - name: Publish to github package
         run: yarn publish
         env:
