@@ -3,7 +3,10 @@
   <img alt="npm (scoped with tag)" src="https://img.shields.io/npm/v/@jsany/log-filesize-webpack-plugin/latest">
   <img src="https://img.shields.io/badge/node-%3E%3D8.10.0-blue.svg" />
   <img alt="npm bundle size (scoped version)" src="https://img.shields.io/bundlephobia/minzip/@jsany/log-filesize-webpack-plugin/latest">
-  <img alt="Coveralls github" src="https://img.shields.io/coveralls/github/jsany/log-filesize-webpack-plugin">
+  <img src="https://github.com/jsany/log-filesize-webpack-plugin/workflows/Publish Package/badge.svg" />
+  <a href="https://codecov.io/gh/jsany/log-filesize-webpack-plugin">
+    <img src="https://codecov.io/gh/jsany/log-filesize-webpack-plugin/branch/main/graph/badge.svg" />
+  </a>
   <a href="https://github.com/jsany/log-filesize-webpack-plugin#readme" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
@@ -25,7 +28,7 @@
 
 ## Prerequisites
 
-- node >=8.10.0
+- node >=10
 - webpack >=4
 
 ## Install
