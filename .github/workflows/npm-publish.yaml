@@ -32,9 +32,12 @@ jobs:
   coverage:
     needs: test
     name: Generate coverage
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
     env:
-      OS: ${{ runner.os }}
+      OS: ${{ matrix.os }}
       NODE: 10
     steps:
       - name: Checkout code
