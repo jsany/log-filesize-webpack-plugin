@@ -78,6 +78,10 @@ jobs:
         with:
           node-version: 10
 
+      - name: Git Config 
+        run: |
+          git config --local user.email "jiangzhiguo2010@qq.com"
+          git config --local user.name "Mr-jiangzhiguo"
       - name: Version release
         run: |
           yarn install
