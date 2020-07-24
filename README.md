@@ -3,7 +3,7 @@
   <img alt="npm (scoped with tag)" src="https://img.shields.io/npm/v/@jsany/log-filesize-webpack-plugin/latest">
   <img src="https://img.shields.io/badge/node-%3E%3D8.10.0-blue.svg" />
   <img alt="npm bundle size (scoped version)" src="https://img.shields.io/bundlephobia/minzip/@jsany/log-filesize-webpack-plugin/latest">
-  <img src="https://github.com/jsany/log-filesize-webpack-plugin/workflows/Publish Package/badge.svg" />
+  <img src="https://github.com/jsany/log-filesize-webpack-plugin/workflows/Publish/badge.svg" />
   <a href="https://codecov.io/gh/jsany/log-filesize-webpack-plugin">
     <img src="https://codecov.io/gh/jsany/log-filesize-webpack-plugin/branch/main/graph/badge.svg" />
   </a>

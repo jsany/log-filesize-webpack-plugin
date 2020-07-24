@@ -1,72 +1,12 @@
-name: Publish Package
+name: Publish 
 
 on:
   release:
     types: [created]
 
 jobs:
-  test:
-    name: Test on node ${{ matrix.node_version }} and ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        node_version: [ "10", "12"]
-        os: [ubuntu-latest, windows-latest, macOS-latest]
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 1
-
-      - name: Use Node.js ${{ matrix.node_version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node_version }}
-
-      - name: Npm install, build and test
-        run: |
-          yarn install
-          yarn build
-          yarn test
-
-  coverage:
-    needs: test
-    name: Generate coverage
-    runs-on: ubuntu-latest
-    env:
-      OS: ubuntu-latest
-      NODE: 10
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 1
-
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 10
-
-      - name: Npm install, build, and coverage
-        run: |
-          yarn install
-          yarn build
-          yarn coverage
-
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v1
-        with:
-          # not required for public repos
-          token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./coverage/clover.xml
-          directory: ./coverage/lcov-report/
-          flags: unittests
-          env_vars: OS,NODE
-          name: codecov-umbrella
-          fail_ci_if_error: true
-          path_to_write_report: ./coverage/codecov_report.gz
 
   publish:
-    needs: coverage
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -97,17 +37,17 @@ jobs:
           yarn install
           yarn build
 
-      - name: Publish to npm
+      - name: Publish to npm 📦
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPMJS_TOKEN}}
 
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 10
-          registry-url: https://npm.pkg.github.com/
+      # - uses: actions/setup-node@v1
+      #   with:
+      #     node-version: 10
+      #     registry-url: https://npm.pkg.github.com/
 
-      - name: Publish to github package
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.MY_GITHUB_TOKEN}}
+      # - name: Publish to github package
+      #   run: npm publish
+      #   env:
+      #     NODE_AUTH_TOKEN: ${{secrets.MY_GITHUB_TOKEN}}
