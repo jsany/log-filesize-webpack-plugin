@@ -1,8 +1,15 @@
 {
   "name": "@jsany/log-filesize-webpack-plugin",
-  "version": "1.2.8",
+  "version": "1.2.9",
   "description": "log assets size after webpack build(wirte by typescript)",
-  "keywords": ["log", "assets", "filesize", "gzip", "webpack", "plugin"],
+  "keywords": [
+    "log",
+    "assets",
+    "filesize",
+    "gzip",
+    "webpack",
+    "plugin"
+  ],
   "homepage": "https://github.com/jsany/log-filesize-webpack-plugin#readme",
   "bugs": {
     "url": "https://github.com/jsany/log-filesize-webpack-plugin/issues"
@@ -15,7 +22,9 @@
   "author": "jiangzhiguo2010",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
-  "files": ["lib"],
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "build": "rimraf lib/* && ttsc",
     "coverage": "jest --runInBand --coverage",
@@ -31,8 +40,12 @@
     }
   },
   "lint-staged": {
-    "**/*.{js,ts,md,json}": ["prettier --write"],
-    "package.json": ["sort-package-json"]
+    "**/*.{js,ts,md,json}": [
+      "prettier --write"
+    ],
+    "package.json": [
+      "sort-package-json"
+    ]
   },
   "dependencies": {
     "chalk": "^4.1.0",
