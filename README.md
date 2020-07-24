@@ -1,22 +1,13 @@
 <h1 align="center">Welcome to log-filesize-webpack-plugin 👋</h1>
-<p>
-  <img alt="npm (scoped with tag)" src="https://img.shields.io/npm/v/@jsany/log-filesize-webpack-plugin/latest">
-  <img src="https://img.shields.io/badge/node-%3E%3D8.10.0-blue.svg" />
-  <img alt="npm bundle size (scoped version)" src="https://img.shields.io/bundlephobia/minzip/@jsany/log-filesize-webpack-plugin/latest">
-  <img src="https://github.com/jsany/log-filesize-webpack-plugin/workflows/Publish/badge.svg" />
-  <a href="https://codecov.io/gh/jsany/log-filesize-webpack-plugin">
-    <img src="https://codecov.io/gh/jsany/log-filesize-webpack-plugin/branch/main/graph/badge.svg" />
-  </a>
-  <a href="https://github.com/jsany/log-filesize-webpack-plugin#readme" target="_blank">
-    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
-  </a>
-  <a href="https://github.com/jsany/log-filesize-webpack-plugin/graphs/commit-activity" target="_blank">
-    <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
-  </a>
-  <a href="https://github.com/jsany/log-filesize-webpack-plugin/blob/main/LICENSE" target="_blank">
-    <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" target="_blank" />
-  </a>
-</p>
+
+![https://www.npmjs.com/package/@jsany/log-filesize-webpack-plugin](https://img.shields.io/npm/v/@jsany/log-filesize-webpack-plugin/latest?logo=npm&style=flat-square)
+![https://www.npmjs.com/package/@jsany/log-filesize-webpack-plugin](https://img.shields.io/bundlephobia/minzip/@jsany/log-filesize-webpack-plugin/latest?logo=npm&style=flat-square)
+![node-current](https://img.shields.io/node/v/@jsany/log-filesize-webpack-plugin?color=blue&style=flat-square)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/jsany/log-filesize-webpack-plugin/Publish?logo=github&style=flat-square)
+![https://codecov.io/gh/jsany/log-filesize-webpack-plugin](https://img.shields.io/codecov/c/github/jsany/log-filesize-webpack-plugin/main?logo=codecov&style=flat-square)
+![https://github.com/jsany/log-filesize-webpack-plugin#readme](https://img.shields.io/badge/documentation-yes-brightgreen.svg?style=flat-square)
+![https://github.com/jsany/log-filesize-webpack-plugin/graphs/commit-activity](https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=flat-square)
+![https://github.com/jsany/log-filesize-webpack-plugin/blob/main/LICENSE](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)
 
 > log assets size pretty after webpack build(wirte by typescript)
 
