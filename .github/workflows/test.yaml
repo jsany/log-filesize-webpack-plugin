@@ -66,30 +66,30 @@ jobs:
           name: codecov-umbrella
           fail_ci_if_error: true
 
-  pushTags:
-    needs: coverage
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
+  # pushTags:
+  #   needs: coverage
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #       with:
+  #         fetch-depth: 0 # otherwise, you will failed to push refs to dest repo
 
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 10
+  #     - uses: actions/setup-node@v1
+  #       with:
+  #         node-version: 10
 
-      - name: Git Config 
-        run: |
-          git config --local user.email "jiangzhiguo2010@qq.com"
-          git config --local user.name "Mr-jiangzhiguo"
-      - name: Version release
-        run: |
-          yarn install
-          yarn release
+  #     - name: Git Config 
+  #       run: |
+  #         git config --local user.email "jiangzhiguo2010@qq.com"
+  #         git config --local user.name "Mr-jiangzhiguo"
+  #     - name: Version release
+  #       run: |
+  #         yarn install
+  #         yarn release
 
-      - name: Push all tags
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.MY_GITHUB_TOKEN }}
-          tags: true
-          branch: main
+  #     - name: Push all tags
+  #       uses: ad-m/github-push-action@master
+  #       with:
+  #         github_token: ${{ secrets.MY_GITHUB_TOKEN }}
+  #         tags: true
+  #         branch: main
