@@ -1,13 +1,31 @@
 <h1 align="center">Welcome to log-filesize-webpack-plugin 👋</h1>
 
-![https://www.npmjs.com/package/@jsany/log-filesize-webpack-plugin](https://img.shields.io/npm/v/@jsany/log-filesize-webpack-plugin/latest?logo=npm&style=flat-square)
-![https://www.npmjs.com/package/@jsany/log-filesize-webpack-plugin](https://img.shields.io/bundlephobia/minzip/@jsany/log-filesize-webpack-plugin/latest?logo=npm&style=flat-square)
-![node-current](https://img.shields.io/node/v/@jsany/log-filesize-webpack-plugin?color=blue&style=flat-square)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/jsany/log-filesize-webpack-plugin/Publish?logo=github&style=flat-square)
-![https://codecov.io/gh/jsany/log-filesize-webpack-plugin](https://img.shields.io/codecov/c/github/jsany/log-filesize-webpack-plugin/main?logo=codecov&style=flat-square)
-![https://github.com/jsany/log-filesize-webpack-plugin#readme](https://img.shields.io/badge/documentation-yes-brightgreen.svg?style=flat-square)
-![https://github.com/jsany/log-filesize-webpack-plugin/graphs/commit-activity](https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=flat-square)
-![https://github.com/jsany/log-filesize-webpack-plugin/blob/main/LICENSE](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)
+<p>
+  <a href="https://www.npmjs.com/package/@jsany/log-filesize-webpack-plugin" target="_blank">
+    <img alt="npm version" src="https://img.shields.io/npm/v/@jsany/log-filesize-webpack-plugin/latest?logo=npm&style=flat-square" />
+  </a>
+  <a href="https://www.npmjs.com/package/@jsany/log-filesize-webpack-plugin" target="_blank">
+    <img alt="npm miniziped size" src="https://img.shields.io/bundlephobia/minzip/@jsany/log-filesize-webpack-plugin/latest?logo=npm&style=flat-square" />
+  </a>
+  <a href="https://www.npmjs.com/package/@jsany/log-filesize-webpack-plugin" target="_blank">
+    <img alt="node version" src="https://img.shields.io/node/v/@jsany/log-filesize-webpack-plugin?color=blue&style=flat-square" />
+  </a>
+  <a href="https://www.npmjs.com/package/@jsany/log-filesize-webpack-plugin" target="_blank">
+    <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/jsany/log-filesize-webpack-plugin/Publish?logo=github&style=flat-square" />
+  </a>
+  <a href="https://codecov.io/gh/jsany/log-filesize-webpack-plugin" target="_blank">
+    <img alt="codecov" src="https://img.shields.io/codecov/c/github/jsany/log-filesize-webpack-plugin/main?logo=codecov&style=flat-square" />
+  </a>
+  <a href="https://github.com/jsany/log-filesize-webpack-plugin#readme" target="_blank">
+    <img alt="documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg?style=flat-square" />
+  </a>
+  <a href="https://github.com/jsany/log-filesize-webpack-plugin/graphs/commit-activity" target="_blank">
+    <img alt="Maintained" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg?style=flat-square" />
+  </a>
+  <a href="https://github.com/jsany/log-filesize-webpack-plugin/blob/main/LICENSE" target="_blank">
+    <img alt="License" src="https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square" />
+  </a>
+</p>
 
 > log assets size pretty after webpack build(wirte by typescript)
 
