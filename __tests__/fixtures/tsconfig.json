@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "lib": ["ES2015", "ESNext", "DOM"],
+    "outDir": "lib",
+    "strict": true,
+    "moduleResolution": "node",
+    "declaration": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"] // fixtures 目录别名
+    },
+    "jsx": "react",
+    "resolveJsonModule": true,
+    "pretty": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "skipLibCheck": true,
+    "removeComments": true
+  },
+  "include": ["./**/*", "typings.d.ts"],
+  "exclude": ["node_modules", "**/test/*", "**/*.spec.ts", "lib", "es", "dist", "build", "example"]
+}

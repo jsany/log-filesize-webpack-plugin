@@ -5,18 +5,19 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 
-module.exports = {
+const config = (module.exports = {
   mode: 'development',
   stats: 'none',
   resolve: {
     alias: {
       '@': resolve(__dirname, '../fixtures')
-    }
+    },
+    extensions: ['.js', '.jsx', '.ts', '.tsx']
   },
   module: {
     rules: [
       {
-        test: /\.js(x?)$/,
+        test: /[\\.]js(x?)$/,
         include: resolve(__dirname, '../fixtures'),
         use: [
           {
@@ -48,7 +49,19 @@ module.exports = {
         ]
       },
       {
-        test: /\.(le|c)ss$/,
+        test: /[\\.]ts(x?)$/,
+        include: resolve(__dirname, '../fixtures'),
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript']
+            }
+          }
+        ]
+      },
+      {
+        test: /[\\.](le|c)ss$/,
         include: resolve(__dirname, '../fixtures'),
         use: [
           MiniCssExtractPlugin.loader,
@@ -73,7 +86,7 @@ module.exports = {
         ]
       },
       {
-        test: /\.(png|jpg|jpeg|gif|svg|svga)$/,
+        test: /[\\.](png|jpg|jpeg|gif|svg|svga)$/,
         include: resolve(__dirname, '../fixtures'),
         use: [
           {
@@ -134,4 +147,4 @@ module.exports = {
     }),
     new ManifestPlugin()
   ]
-};
+});

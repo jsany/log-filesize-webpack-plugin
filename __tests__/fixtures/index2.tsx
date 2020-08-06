@@ -1,3 +1,3 @@
-import { generateRandom } from '@/utils/index';
+import { generateRandom } from '@/utils';
 
 console.log('== Index2 ==', generateRandom(10));

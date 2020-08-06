@@ -1,19 +1,22 @@
-const { resolve } = require('path');
-const webpack = require('webpack');
-const rimraf = require('rimraf');
+import { resolve } from 'path';
+import webpack, { Configuration } from 'webpack';
+import pkg from 'webpack/package.json';
+import LogFilesizeWebpackPlugin from '../lib/index';
+const baseConfig = require('./support/webpack.base.conf');
 
-const webpackMajorVersion = Number(require('webpack/package.json').version.split('.')[0]);
+const webpackMajorVersion = Number(pkg.version.split('.')[0]);
 
 if (isNaN(webpackMajorVersion)) {
   throw new Error('Cannot parse webpack major version');
 }
-
-const LogFilesizeWebpackPlugin = require('../lib/index');
-const baseConfig = require('./support/webpack.base.conf');
-
 const OUTPUT_DIR = resolve(__dirname, '../dist/basic-test');
 
-const testLogFilesizePlugin = (webpackConfig, pluginInstance, done) => {
+const testLogFilesizePlugin = (
+  webpackConfig: Configuration,
+  pluginInstance: any,
+  done: Function
+) => {
+  // console.log(webpackConfig)
   webpack(webpackConfig, (err, stats) => {
     expect(err).toBeFalsy();
     const compilationErrors = (stats.compilation.errors || []).join('\n');
@@ -49,17 +52,19 @@ describe('LogFilesizeWebpackPlugin', () => {
   });
 
   it('shoule be printfStats', (done) => {
-    const config = { ...baseConfig };
+    const config = { ...baseConfig } as Configuration;
+    // @ts-ignore
     config.entry = {
-      index1: resolve(__dirname, './fixtures/index1.js'),
-      index2: resolve(__dirname, './fixtures/index2.js')
+      index1: resolve(__dirname, './fixtures/index1.tsx'),
+      index2: resolve(__dirname, './fixtures/index2.tsx')
     };
+    // @ts-ignore
     config.output = {
       path: OUTPUT_DIR,
       filename: 'js/[name].[chunkhash:6].js',
       chunkFilename: 'js/[name].[chunkhash:6].js'
     };
-    config.plugins.push(log);
+    config.plugins!.push(log);
     testLogFilesizePlugin(config, log, done);
   });
 });

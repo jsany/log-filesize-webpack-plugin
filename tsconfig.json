@@ -13,6 +13,8 @@
       "@@/*": ["../*"] // 根目录别名
     },
     "plugins": [{ "transform": "typescript-transform-paths" }],
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
     "pretty": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,

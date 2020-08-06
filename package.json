@@ -2,14 +2,7 @@
   "name": "@jsany/log-filesize-webpack-plugin",
   "version": "1.2.10",
   "description": "log assets size after webpack build(wirte by typescript)",
-  "keywords": [
-    "log",
-    "assets",
-    "filesize",
-    "gzip",
-    "webpack",
-    "plugin"
-  ],
+  "keywords": ["log", "assets", "filesize", "gzip", "webpack", "plugin"],
   "homepage": "https://github.com/jsany/log-filesize-webpack-plugin#readme",
   "bugs": {
     "url": "https://github.com/jsany/log-filesize-webpack-plugin/issues"
@@ -22,9 +15,7 @@
   "author": "jiangzhiguo2010",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
-  "files": [
-    "lib"
-  ],
+  "files": ["lib"],
   "scripts": {
     "build": "rimraf lib/* && ttsc",
     "coverage": "jest --runInBand --coverage",
@@ -40,12 +31,8 @@
     }
   },
   "lint-staged": {
-    "**/*.{js,ts,md,json}": [
-      "prettier --write"
-    ],
-    "package.json": [
-      "sort-package-json"
-    ]
+    "**/*.{js,ts,md,json}": ["prettier --write"],
+    "package.json": ["sort-package-json"]
   },
   "dependencies": {
     "chalk": "^4.1.0",
@@ -61,11 +48,14 @@
     "@babel/plugin-transform-runtime": "^7.10.5",
     "@babel/preset-env": "^7.10.4",
     "@babel/preset-react": "^7.10.4",
+    "@babel/preset-typescript": "^7.10.4",
     "@commitlint/cli": "^9.1.1",
     "@commitlint/config-conventional": "^9.1.1",
-    "@types/jest": "^26.0.4",
+    "@types/jest": "^26.0.9",
     "@types/mime": "^2.0.2",
     "@types/node": "^14.0.23",
+    "@types/react": "^16.9.44",
+    "@types/react-dom": "^16.9.8",
     "@types/rimraf": "^3.0.0",
     "@types/webpack": "^4.41.21",
     "@typescript-eslint/eslint-plugin": "^3.6.1",
@@ -91,6 +81,7 @@
     "rimraf": "^3.0.2",
     "sort-package-json": "^1.44.0",
     "standard-version": "^8.0.2",
+    "ts-jest": "^26.1.4",
     "ttypescript": "^1.5.10",
     "typescript": "^3.9.6",
     "typescript-transform-paths": "^1.1.14",
