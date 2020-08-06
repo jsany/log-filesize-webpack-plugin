@@ -1,6 +1,6 @@
 {
   "name": "@jsany/log-filesize-webpack-plugin",
-  "version": "1.2.10",
+  "version": "1.2.11",
   "description": "log assets size after webpack build(wirte by typescript)",
   "keywords": ["log", "assets", "filesize", "gzip", "webpack", "plugin"],
   "homepage": "https://github.com/jsany/log-filesize-webpack-plugin#readme",
