@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.12](https://github.com/jsany/log-filesize-webpack-plugin/compare/v1.2.11...v1.2.12) (2020-08-19)
+
+### Bug Fixes
+
+- transform path \*.d.ts alias([#4](https://github.com/jsany/log-filesize-webpack-plugin/issues/4)) ([996dbd7](https://github.com/jsany/log-filesize-webpack-plugin/commit/996dbd77c7b6e82f8d839a46e366e4bfedd856d6))
+
 ### [1.2.11](https://github.com/jsany/log-filesize-webpack-plugin/compare/v1.2.10...v1.2.11) (2020-08-06)
 
 ### Bug Fixes
