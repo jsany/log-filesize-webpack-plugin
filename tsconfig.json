@@ -12,7 +12,10 @@
       "@/*": ["./*"], // src 目录别名
       "@@/*": ["../*"] // 根目录别名
     },
-    "plugins": [{ "transform": "typescript-transform-paths" }],
+    "plugins": [
+      { "transform": "typescript-transform-paths" },
+      { "transform": "typescript-transform-paths", "afterDeclarations": true }
+    ],
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "pretty": true,
