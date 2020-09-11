@@ -27,6 +27,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
+      "prepare-commit-msg": "devmoji -e --lint",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
@@ -65,6 +66,7 @@
     "clean-webpack-plugin": "^3.0.0",
     "cross-env": "^7.0.2",
     "css-loader": "^3.6.0",
+    "devmoji": "^2.1.9",
     "eslint": "^7.4.0",
     "eslint-config-alloy": "^3.7.3",
     "file-loader": "^6.0.0",
